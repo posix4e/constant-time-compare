@@ -1,0 +1,4 @@
+[package]
+name = "constant-time-compare"
+version = "0.1.0"
+authors = ["Alex HotShot Newman <alex.newman@wandisco.com>"]
