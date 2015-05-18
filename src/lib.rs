@@ -1,14 +1,18 @@
 
 use std::vec::Vec;
+use std::i64::MAX;
 
 fn is_equal(a: Vec<u8>, b:Vec<u8>) -> bool {
     number_of_different_chars(a, b) == 0
 }
 
-#[inline(never)]
+#[inline(never)] // This should be inlined to prevent another function from optimizing it to not
+                 // be constant time.
 fn number_of_different_chars(a: Vec<u8>, b :Vec<u8>) -> i32 {
     if a.len() != b.len() {
         -1
+    } else if (a.len() as i64) > MAX {
+        panic!("Unable to compare such large arrays of bytes. Please keep the size under a billion or so");
     } else {
         let mut result: i32 = 0;
         for (&x, &y) in a.iter().zip(b.iter()) {
